@@ -1,0 +1,209 @@
+/* ===============================
+   PrimeVest Payment Page
+   css/payment.css
+================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+/* Container */
+
+.payment-container{
+    width:100%;
+    max-width:420px;
+}
+
+/* Card */
+
+.payment-card{
+    background:#fff;
+    border-radius:20px;
+    padding:30px 20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+/* Logo */
+
+.logo{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.logo i{
+    font-size:55px;
+    color:#0d6efd;
+    margin-bottom:10px;
+}
+
+.logo h2{
+    color:#222;
+    margin-top:8px;
+}
+
+.payment-card h3{
+    text-align:center;
+    margin-bottom:20px;
+    color:#555;
+}
+
+/* Amount Box */
+
+.amount-box{
+    background:#0d6efd;
+    color:#fff;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.amount-box span{
+    font-size:15px;
+}
+
+.amount-box h1{
+    margin-top:10px;
+    font-size:34px;
+}
+
+/* Form */
+
+form{
+    display:flex;
+    flex-direction:column;
+}
+
+label{
+    font-weight:600;
+    color:#444;
+    margin-bottom:8px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+    transition:.3s;
+}
+
+input:focus{
+    border-color:#0d6efd;
+}
+
+/* Button */
+
+button{
+    margin-top:20px;
+    border:none;
+    border-radius:12px;
+    padding:15px;
+    background:#0d6efd;
+    color:#fff;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#0b5ed7;
+}
+
+button i{
+    margin-right:8px;
+}
+
+/* Information */
+
+.info{
+    margin-top:20px;
+    text-align:center;
+    color:#666;
+    font-size:14px;
+    line-height:22px;
+}
+
+/* Processing Modal */
+
+.processing-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.processing-card{
+    background:#fff;
+    width:90%;
+    max-width:330px;
+    border-radius:18px;
+    padding:30px 20px;
+    text-align:center;
+}
+
+.processing-card h2{
+    margin:15px 0 10px;
+    color:#222;
+}
+
+.processing-card p{
+    color:#666;
+    line-height:22px;
+}
+
+/* Loader */
+
+.loader{
+    width:65px;
+    height:65px;
+    border:6px solid #ddd;
+    border-top:6px solid #0d6efd;
+    border-radius:50%;
+    margin:auto;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* Responsive */
+
+@media(max-width:480px){
+
+    .payment-card{
+        padding:25px 18px;
+    }
+
+    .amount-box h1{
+        font-size:28px;
+    }
+
+    button{
+        font-size:16px;
+    }
+
+}
