@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | PrimeVest</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="top-bar">
+        <i class="fa-solid fa-arrow-left" onclick="history.back()"></i>
+        <h2>About PrimeVest</h2>
+        <i class="fa-solid fa-circle-info"></i>
+    </header>
+
+    <!-- Logo -->
+    <section class="profile-card">
+
+        <div class="avatar">
+            <i class="fa-solid fa-chart-line"></i>
+        </div>
+
+        <h2>PrimeVest</h2>
+
+        <p>Version 1.0.0</p>
+
+    </section>
+
+    <!-- About -->
+    <section class="history">
+
+        <h3>
+            <i class="fa-solid fa-building"></i>
+            About Us
+        </h3>
+
+        <br>
+
+        <p style="line-height:28px; color:#555;">
+
+            PrimeVest is a modern investment platform designed
+            with a simple and secure experience.
+
+            Members can browse available investment products,
+            purchase investments, monitor their account,
+            recharge their wallet, receive daily earnings,
+            and submit withdrawal requests from one place.
+
+        </p>
+
+    </section>
+
+    <!-- Features -->
+
+    <section class="history">
+
+        <h3>
+            <i class="fa-solid fa-star"></i>
+            Features
+        </h3>
+
+        <br>
+
+        <p>✔ Secure Safaricom Daraja STK Push Payments</p>
+        <br>
+
+        <p>✔ Daily Earnings Collection</p>
+        <br>
+
+        <p>✔ Recharge Wallet</p>
+        <br>
+
+        <p>✔ Fast Withdrawal Requests</p>
+        <br>
+
+        <p>✔ Referral Rewards</p>
+        <br>
+
+        <p>✔ Account Settings</p>
+
+    </section>
+
+    <!-- Support -->
+
+    <section class="history">
+
+        <h3>
+            <i class="fa-solid fa-headset"></i>
+            Contact Support
+        </h3>
+
+        <br>
+
+        <p>
+            Need help?
+        </p>
+
+        <br>
+
+        <button onclick="contactSupport()">
+
+            <i class="fa-brands fa-whatsapp"></i>
+
+            WhatsApp Support
+
+        </button>
+
+    </section>
+
+    <!-- Copyright -->
+
+    <section class="history">
+
+        <h3>
+            <i class="fa-solid fa-copyright"></i>
+            Copyright
+        </h3>
+
+        <br>
+
+        <p>
+
+            © 2026 PrimeVest.
+
+            All Rights Reserved.
+
+        </p>
+
+    </section>
+
+    <!-- Bottom Navigation -->
+
+    <nav class="bottom-nav">
+
+        <a href="home.html">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="receive.html">
+            <i class="fa-solid fa-gift"></i>
+            <span>Receive</span>
+        </a>
+
+        <a href="payment.html">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Recharge</span>
+        </a>
+
+        <a href="withdraw.html">
+            <i class="fa-solid fa-money-bill-wave"></i>
+            <span>Withdraw</span>
+        </a>
+
+        <a href="settings.html">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+    <script>
+
+        function contactSupport(){
+
+            const supportNumber = "254700000000"; // Replace with your number
+
+            const message = encodeURIComponent(
+                "Hello PrimeVest Support, I need assistance."
+            );
+
+            window.open(
+                `https://wa.me/${supportNumber}?text=${message}`,
+                "_blank"
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>
