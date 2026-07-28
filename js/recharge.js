@@ -1,32 +1,41 @@
 // Backend URL
 const API_URL = "https://fuliza-backend-xgsm.onrender.com";
 
-// Recharge form
-const rechargeForm = document.getElementById("rechargeForm");
+// Recharge formconst phoneInput = document.getElementById("phone").value.trim();
+const amountInput = document.getElementById("amount").value.trim();
 
-if (rechargeForm) {
-  rechargeForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+// Format phone number
+let phone = phoneInput;
 
-    const phone = document.getElementById("phone").value.trim();
-    const amount = document.getElementById("amount").value.trim();
+if (phone.startsWith("+254")) {
+    phone = phone.slice(1);
+} else if (phone.startsWith("0")) {
+    phone = "254" + phone.slice(1);
+} else if (phone.startsWith("7")) {
+    phone = "254" + phone;
+}
 
-    if (!phone || !amount) {
-      alert("Please enter phone number and amount.");
-      return;
-    }
+// Convert amount to plain integer
+const amount = Number(
+    amountInput
+        .replace(/[^0-9]/g, "") // removes KSh, commas, spaces, etc.
+);
 
-    try {
-      const res = await fetch(`${API_URL}/api/mpesa/stkpush`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          phone,
-          amount
-        })
-      });
+if (!phone || !amount) {
+    alert("Enter a valid phone number and amount.");
+    return;
+}
+
+const response = await fetch(`${API_URL}/api/mpesa/stkpush`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        phone,
+        amount
+    })
+});
 
       const data = await res.json();
 
