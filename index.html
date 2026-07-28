@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeVest - Login</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+    <div class="auth-container">
+
+        <!-- Logo -->
+        <div class="logo">
+            <i class="fa-solid fa-chart-line"></i>
+            <h1>PrimeVest</h1>
+            <p>Grow Your Investment</p>
+        </div>
+
+        <!-- Login Card -->
+        <div class="auth-card">
+
+            <h2>Login</h2>
+
+            <form id="loginForm">
+
+                <div class="input-box">
+                    <i class="fa fa-user"></i>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Username"
+                        required
+                    >
+                </div>
+
+                <div class="input-box">
+                    <i class="fa fa-lock"></i>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        required
+                    >
+                    <i class="fa fa-eye toggle-password"></i>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    Login
+                </button>
+
+            </form>
+
+            <div class="links">
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <div class="register-link">
+                Don't have an account?
+                <a href="register.html">Create Account</a>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 PrimeVest. All Rights Reserved.</p>
+        </div>
+
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+        <p>Signing in...</p>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/auth.js"></script>
+
+</body>
+</html>
