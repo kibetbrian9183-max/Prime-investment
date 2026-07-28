@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeVest | Home</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+
+        <div class="logo">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>PrimeVest</span>
+        </div>
+
+        <div class="header-icons">
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-user-circle" onclick="location.href='profile.html'"></i>
+        </div>
+
+    </header>
+
+    <!-- Welcome -->
+    <section class="welcome">
+
+        <h2 id="welcomeUser">Welcome</h2>
+
+        <div class="balance-card">
+
+            <p>Account Balance</p>
+
+            <h1 id="balance">
+                KSh 0.00
+            </h1>
+
+            <button onclick="location.href='profile.html'">
+                View Profile
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- Products -->
+    <section class="products">
+
+        <h3>Investment Products</h3>
+
+        <div id="productsContainer">
+
+            <!-- Product 1 -->
+            <div class="product-card">
+
+                <h2>KSh 500</h2>
+
+                <p><i class="fa-solid fa-wallet"></i> Investment</p>
+
+                <p><i class="fa-solid fa-coins"></i> Daily Profit: <b>KSh 35</b></p>
+
+                <p><i class="fa-regular fa-clock"></i> Duration: <b>30 Days</b></p>
+
+                <button onclick="purchaseProduct(500)">
+                    Purchase
+                </button>
+
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+
+                <h2>KSh 1,000</h2>
+
+                <p><i class="fa-solid fa-wallet"></i> Investment</p>
+
+                <p><i class="fa-solid fa-coins"></i> Daily Profit: <b>KSh 75</b></p>
+
+                <p><i class="fa-regular fa-clock"></i> Duration: <b>30 Days</b></p>
+
+                <button onclick="purchaseProduct(1000)">
+                    Purchase
+                </button>
+
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+
+                <h2>KSh 2,000</h2>
+
+                <p><i class="fa-solid fa-wallet"></i> Investment</p>
+
+                <p><i class="fa-solid fa-coins"></i> Daily Profit: <b>KSh 160</b></p>
+
+                <p><i class="fa-regular fa-clock"></i> Duration: <b>30 Days</b></p>
+
+                <button onclick="purchaseProduct(2000)">
+                    Purchase
+                </button>
+
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+
+                <h2>KSh 5,000</h2>
+
+                <p><i class="fa-solid fa-wallet"></i> Investment</p>
+
+                <p><i class="fa-solid fa-coins"></i> Daily Profit: <b>KSh 420</b></p>
+
+                <p><i class="fa-regular fa-clock"></i> Duration: <b>30 Days</b></p>
+
+                <button onclick="purchaseProduct(5000)">
+                    Purchase
+                </button>
+
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+
+                <h2>KSh 10,000</h2>
+
+                <p><i class="fa-solid fa-wallet"></i> Investment</p>
+
+                <p><i class="fa-solid fa-coins"></i> Daily Profit: <b>KSh 900</b></p>
+
+                <p><i class="fa-regular fa-clock"></i> Duration: <b>30 Days</b></p>
+
+                <button onclick="purchaseProduct(10000)">
+                    Purchase
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+
+        <a href="home.html" class="active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="receive.html">
+            <i class="fa-solid fa-gift"></i>
+            <span>Receive</span>
+        </a>
+
+        <a href="recharge.html">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Recharge</span>
+        </a>
+
+        <a href="withdraw.html">
+            <i class="fa-solid fa-money-bill-wave"></i>
+            <span>Withdraw</span>
+        </a>
+
+        <a href="profile.html">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+    <!-- Live Activity -->
+    <div id="liveActivity" class="live-activity">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="activityText">
+            James (07******21) invested KSh 5,000
+        </span>
+    </div>
+
+    <script src="js/home.js"></script>
+
+</body>
+</html>
