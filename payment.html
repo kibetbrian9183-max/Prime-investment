@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeVest | Payment</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/payment.css">
+</head>
+<body>
+
+<div class="payment-container">
+
+    <div class="payment-card">
+
+        <div class="logo">
+            <i class="fa-solid fa-wallet"></i>
+            <h2>PrimeVest</h2>
+        </div>
+
+        <h3>Safaricom STK Push</h3>
+
+        <div class="amount-box">
+            <span>Investment Amount</span>
+            <h1 id="amount">KSh 0</h1>
+        </div>
+
+        <form id="paymentForm">
+
+            <label>Safaricom Phone Number</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="07XXXXXXXX"
+                maxlength="10"
+                required
+            >
+
+            <button type="submit" id="payBtn">
+                <i class="fa-solid fa-paper-plane"></i>
+                Pay Now
+            </button>
+
+        </form>
+
+        <div class="info">
+            <p>
+                After tapping <b>Pay Now</b>, an STK Push request will be
+                sent to your Safaricom phone. Enter your M-PESA PIN to
+                complete the payment.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Processing Modal -->
+
+<div id="processingModal" class="processing-modal">
+
+    <div class="processing-card">
+
+        <div class="loader"></div>
+
+        <h2>Processing Payment...</h2>
+
+        <p>
+            Please check your phone and enter your
+            M-PESA PIN.
+        </p>
+
+    </div>
+
+</div>
+
+<script src="js/home.js"></script>
+
+<script>
+
+const amount = Number(localStorage.getItem("purchaseAmount")) || 0;
+
+document.getElementById("amount").innerText =
+"KSh " + amount.toLocaleString();
+
+document
+.getElementById("paymentForm")
+.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let phone =
+    document.getElementById("phone").value.trim();
+
+    if(phone.length !== 10){
+
+        alert("Enter a valid Safaricom number.");
+
+        return;
+
+    }
+
+    document
+    .getElementById("processingModal")
+    .style.display = "flex";
+
+    stkPush(phone, amount);
+
+});
+
+</script>
+
+</body>
+</html>
