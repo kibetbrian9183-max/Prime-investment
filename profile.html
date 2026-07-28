@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeVest | Profile</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+<header class="top-bar">
+    <h2>My Profile</h2>
+    <i class="fa-solid fa-gear" onclick="location.href='settings.html'"></i>
+</header>
+
+<section class="profile-card">
+
+    <div class="avatar">
+        <i class="fa-solid fa-user"></i>
+    </div>
+
+    <h2 id="username">Username</h2>
+
+    <p id="phone">07XXXXXXXX</p>
+
+</section>
+
+<section class="balance-grid">
+
+    <div class="box">
+        <span>Account Balance</span>
+        <h3 id="balance">KSh 0</h3>
+    </div>
+
+    <div class="box">
+        <span>Total Investment</span>
+        <h3 id="investment">KSh 0</h3>
+    </div>
+
+    <div class="box">
+        <span>Daily Earnings</span>
+        <h3 id="dailyIncome">KSh 0</h3>
+    </div>
+
+    <div class="box">
+        <span>Registration Bonus</span>
+        <h3 id="bonus">KSh 150</h3>
+    </div>
+
+</section>
+
+<section class="actions">
+
+    <button onclick="location.href='receive.html'">
+        <i class="fa-solid fa-gift"></i>
+        Receive
+    </button>
+
+    <button onclick="location.href='payment.html'">
+        <i class="fa-solid fa-wallet"></i>
+        Recharge
+    </button>
+
+    <button onclick="location.href='withdraw.html'">
+        <i class="fa-solid fa-money-bill-wave"></i>
+        Withdraw
+    </button>
+
+</section>
+
+<section class="invite">
+
+    <h3>Invite Friends</h3>
+
+    <input
+        type="text"
+        id="inviteLink"
+        readonly
+    >
+
+    <button onclick="copyInviteLink()">
+        <i class="fa-solid fa-copy"></i>
+        Copy Link
+    </button>
+
+    <br><br>
+
+    <strong>Your Referral Code</strong>
+
+    <h2 id="referralCode">PV000001</h2>
+
+</section>
+
+<section class="history">
+
+    <h3>Daily Earnings History</h3>
+
+    <div id="earningHistory">
+
+        <p>No earnings yet.</p>
+
+    </div>
+
+</section>
+
+<section class="history">
+
+    <h3>Withdrawal History</h3>
+
+    <div id="withdrawHistory">
+
+        <p>No withdrawals yet.</p>
+
+    </div>
+
+</section>
+
+<nav class="bottom-nav">
+
+    <a href="home.html">
+        <i class="fa-solid fa-house"></i>
+        Home
+    </a>
+
+    <a href="receive.html">
+        <i class="fa-solid fa-gift"></i>
+        Receive
+    </a>
+
+    <a href="payment.html">
+        <i class="fa-solid fa-wallet"></i>
+        Recharge
+    </a>
+
+    <a href="withdraw.html">
+        <i class="fa-solid fa-money-bill-wave"></i>
+        Withdraw
+    </a>
+
+    <a href="profile.html" class="active">
+        <i class="fa-solid fa-user"></i>
+        Profile
+    </a>
+
+</nav>
+
+<script src="js/profile.js"></script>
+
+</body>
+</html>
