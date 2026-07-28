@@ -9,63 +9,66 @@ amount ? `KSh ${Number(amount).toLocaleString()}` : "";
 
 document.getElementById("payBtn").addEventListener("click", async () => {
 
-let phone = document.getElementById("phone").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let amount = document.getElementById("displayAmount").value.trim();
 
-if(phone.startsWith("+254")){
-phone = phone.substring(1);
-}else if(phone.startsWith("0")){
-phone = "254"+phone.substring(1);
-}else if(phone.startsWith("7")){
-phone = "254"+phone;
-}
+    // Convert phone number to 2547XXXXXXXX
+    phone = phone.replace(/\s+/g, "");
 
-if(!/^2547\d{8}$/.test(phone)){
-alert("Enter a valid Safaricom number.");
-return;
-}
+    if (phone.startsWith("+254")) {
+        phone = phone.substring(1);      // +2547... -> 2547...
+    } else if (phone.startsWith("254")) {
+        // Already correct
+    } else if (phone.startsWith("07")) {
+        phone = "254" + phone.substring(1); // 07... -> 2547...
+    } else if (phone.startsWith("01")) {
+        phone = "254" + phone.substring(1); // 01... -> 2541...
+    } else if (phone.startsWith("7") || phone.startsWith("1")) {
+        phone = "254" + phone;              // 7... or 1... -> 254...
+    } else {
+        alert("Enter a valid Safaricom number.");
+        return;
+    }
 
-document.getElementById("status").innerHTML="Sending STK Push...";
+    // Convert amount to plain integer
+    amount = Number(
+        amount.replace(/[^\d]/g, "")
+    );
 
-try{
+    if (isNaN(amount) || amount <= 0) {
+        alert("Invalid amount.");
+        return;
+    }
 
-const response = await fetch(`${API_URL}/api/mpesa/stkpush`,{
+    document.getElementById("status").innerHTML = "Sending STK Push...";
 
-method:"POST",
+    try {
 
-headers:{
-"Content-Type":"application/json"
-},
+        const response = await fetch(`${API_URL}/api/mpesa/stkpush`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                phone: phone,
+                amount: amount
+            })
+        });
 
-body:JSON.stringify({
+        const data = await response.json();
 
-phone:phone,
-amount:Number(amount)
+        if (data.checkoutRequestID) {
+            document.getElementById("status").innerHTML =
+                "STK Push sent. Check your phone and enter your M-Pesa PIN.";
+            checkStatus(data.checkoutRequestID);
+        } else {
+            alert(data.message || "Payment failed.");
+        }
 
-})
-
-});
-
-const data = await response.json();
-
-if(data.checkoutRequestID){
-
-document.getElementById("status").innerHTML="Check your phone and enter your M-Pesa PIN.";
-
-checkStatus(data.checkoutRequestID);
-
-}else{
-
-alert(data.message || "Payment failed.");
-
-}
-
-}catch(err){
-
-console.log(err);
-
-alert("Server error.");
-
-}
+    } catch (err) {
+        console.error(err);
+        alert("Server error.");
+    }
 
 });
 
