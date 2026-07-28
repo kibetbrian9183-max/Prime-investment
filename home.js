@@ -49,11 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // -------------------------------
 function purchaseProduct(amount) {
 
-    localStorage.setItem("purchaseAmount", amount);
+    // Redirect to payment page with amount
+    window.location.href = `payment.html?amount=${amount}`;
 
-    window.location.href = "payment.html";
 }
-
 // -------------------------------
 // STK Push
 // Called from payment.html
