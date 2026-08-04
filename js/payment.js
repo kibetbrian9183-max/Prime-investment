@@ -1,111 +1,209 @@
-const API_URL = "https://fuliza-backend-xgsm.onrender.com";
+// ======================================
+// PrimeVest - payment.js
+// ======================================
 
-// Read amount from URL
+// Your Render Backend URL
+const API_URL = "https://YOUR-RENDER-APP.onrender.com";
+
+// Get amount from URL
 const params = new URLSearchParams(window.location.search);
-const amount = params.get("amount");
+const amount = Number(params.get("amount")) || 0;
 
-document.getElementById("displayAmount").value =
-amount ? `KSh ${Number(amount).toLocaleString()}` : "";
+// Elements
+const amountInput = document.getElementById("displayAmount");
+const phoneInput = document.getElementById("phone");
+const payBtn = document.getElementById("payBtn");
+const status = document.getElementById("status");
 
-document.getElementById("payBtn").addEventListener("click", async () => {
+// Display Amount
+if (amountInput) {
+    amountInput.value = "KSh " + amount.toLocaleString();
+}
 
-    let phone = document.getElementById("phone").value.trim();
-    let amount = document.getElementById("displayAmount").value.trim();
+// ===========================
+// Convert Phone Number
+// ===========================
+function formatPhone(phone) {
 
-    // Convert phone number to 2547XXXXXXXX
-    phone = phone.replace(/\s+/g, "");
+    phone = phone.replace(/\D/g, "");
 
-    if (phone.startsWith("+254")) {
-        phone = phone.substring(1);      // +2547... -> 2547...
-    } else if (phone.startsWith("254")) {
-        // Already correct
-    } else if (phone.startsWith("07")) {
-        phone = "254" + phone.substring(1); // 07... -> 2547...
-    } else if (phone.startsWith("01")) {
-        phone = "254" + phone.substring(1); // 01... -> 2541...
-    } else if (phone.startsWith("7") || phone.startsWith("1")) {
-        phone = "254" + phone;              // 7... or 1... -> 254...
-    } else {
-        alert("Enter a valid Safaricom number.");
+    if (phone.startsWith("07")) {
+        return "254" + phone.substring(1);
+    }
+
+    if (phone.startsWith("01")) {
+        return "254" + phone.substring(1);
+    }
+
+    if (phone.startsWith("7")) {
+        return "254" + phone;
+    }
+
+    if (phone.startsWith("1")) {
+        return "254" + phone;
+    }
+
+    if (phone.startsWith("254")) {
+        return phone;
+    }
+
+    return null;
+}
+
+// ===========================
+// Pay Button
+// ===========================
+payBtn.addEventListener("click", async () => {
+
+    let phone = formatPhone(phoneInput.value);
+
+    if (!phone) {
+        alert("Enter a valid Safaricom phone number.");
         return;
     }
 
-    // Convert amount to plain integer
-    amount = Number(
-        amount.replace(/[^\d]/g, "")
-    );
-
-    if (isNaN(amount) || amount <= 0) {
+    if (amount < 1) {
         alert("Invalid amount.");
         return;
     }
 
-    document.getElementById("status").innerHTML = "Sending STK Push...";
+    payBtn.disabled = true;
+    status.innerHTML = "Sending STK Push...";
 
     try {
 
-        const response = await fetch(`${API_URL}/api/mpesa/stkpush`, {
+        const response = await fetch(`${API_URL}/api/payment`, {
+
             method: "POST",
+
             headers: {
                 "Content-Type": "application/json"
             },
+
             body: JSON.stringify({
+
                 phone: phone,
+
                 amount: amount
+
             })
+
         });
 
         const data = await response.json();
 
-        if (data.checkoutRequestID) {
-            document.getElementById("status").innerHTML =
-                "STK Push sent. Check your phone and enter your M-Pesa PIN.";
-            checkStatus(data.checkoutRequestID);
+        if (data.success) {
+
+            status.innerHTML =
+                "STK Push sent successfully.<br>Check your phone.";
+
+            localStorage.setItem(
+                "checkoutRequestId",
+                data.checkout_request_id
+            );
+
+            checkPayment(data.checkout_request_id);
+
         } else {
-            alert(data.message || "Payment failed.");
+
+            payBtn.disabled = false;
+
+            status.innerHTML = "";
+
+            alert(data.message || "Unable to initiate payment.");
+
         }
 
-    } catch (err) {
-        console.error(err);
-        alert("Server error.");
+    } catch (error) {
+
+        console.log(error);
+
+        payBtn.disabled = false;
+
+        status.innerHTML = "";
+
+        alert("Unable to connect to server.");
+
     }
 
 });
 
-function checkStatus(id){
+// ===========================
+// Check Payment Status
+// ===========================
+function checkPayment(id) {
 
-const timer=setInterval(async()=>{
+    const timer = setInterval(async () => {
 
-try{
+        try {
 
-const res=await fetch(`${API_URL}/api/mpesa/status/${id}`);
+            const response = await fetch(
+                `${API_URL}/api/local/${id}`
+            );
 
-const data=await res.json();
+            const result = await response.json();
 
-if(data.status==="SUCCESS"){
+            if (result.status === "COMPLETED") {
 
-clearInterval(timer);
+                clearInterval(timer);
 
-alert("Payment Successful!");
+                paymentSuccess();
 
-window.location.href="profile.html";
+            }
+
+            if (result.status === "FAILED") {
+
+                clearInterval(timer);
+
+                payBtn.disabled = false;
+
+                status.innerHTML = "";
+
+                alert("Payment Failed.");
+
+            }
+
+        } catch (err) {
+
+            console.log(err);
+
+        }
+
+    }, 3000);
 
 }
 
-if(data.status==="FAILED"){
+// ===========================
+// Payment Success
+// ===========================
+function paymentSuccess() {
 
-clearInterval(timer);
+    let user = JSON.parse(localStorage.getItem("user")) || {
 
-alert("Payment Failed.");
+        balance: 0,
 
-}
+        investment: 0,
 
-}catch(e){
+        firstPurchase: false
 
-console.log(e);
+    };
 
-}
+    user.investment += amount;
 
-},5000);
+    if (!user.firstPurchase) {
+
+        user.balance += 150;
+
+        user.firstPurchase = true;
+
+        alert("🎉 Registration Bonus\n\nKSh 150 has been credited.");
+
+    }
+
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("Payment Successful!");
+
+    window.location.href = "profile.html";
 
 }
