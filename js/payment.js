@@ -3,7 +3,7 @@
 // ======================================
 
 // Your Render Backend URL
-const API_URL = "https://YOUR-RENDER-APP.onrender.com";
+const API_URL = "https://smartpaypesa-backend.onrender.com";
 
 // Get amount from URL
 const params = new URLSearchParams(window.location.search);
