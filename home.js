@@ -4,7 +4,7 @@
 // ======================================
 
 // Your Render Backend
-const API_BASE = "https://YOUR-RENDER-APP.onrender.com";
+const API_BASE = "https://smartpaypesa-backend.onrender.com";
 
 // Investment Products
 const products = [
